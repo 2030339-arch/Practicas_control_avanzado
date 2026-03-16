@@ -1,2 +1,2 @@
-idf_component_register(SRCS "encoder_reader.c"
+idf_component_register(SRCS "main.c" "encoder_reader.c"
                     INCLUDE_DIRS ".")

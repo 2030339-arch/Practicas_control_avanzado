@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "encoder.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 #include "esp_log.h"
 
 static const char *TAG = "ENCODER";
@@ -21,7 +19,6 @@ void encoder_init(void)
 
     ESP_ERROR_CHECK(pcnt_new_unit(&unit_config, &pcnt_unit));
 
-    // filtro para ruido
     pcnt_glitch_filter_config_t filter_config = {
         .max_glitch_ns = 1000,
     };
@@ -98,34 +95,4 @@ float encoder_get_rpm(void)
     float rpm = (revolutions * 60000.0) / SAMPLE_TIME_MS;
 
     return rpm;
-}
-
-void app_main(void)
-{
-    encoder_init();
-
-    while (1)
-    {
-        int count = encoder_get_count();
-
-        float rpm = encoder_get_rpm();
-
-        ESP_LOGI(TAG, "Conteo de pulsos: %d", count);
-        ESP_LOGI(TAG, "Velocidad: %.2f RPM", rpm);
-
-        if (rpm > 0)
-        {
-            ESP_LOGI(TAG, "Sentido: Horario");
-        }
-        else if (rpm < 0)
-        {
-            ESP_LOGI(TAG, "Sentido: Antihorario");
-        }
-        else
-        {
-            ESP_LOGI(TAG, "Motor detenido");
-        }
-
-        vTaskDelay(pdMS_TO_TICKS(SAMPLE_TIME_MS));
-    }
 }
