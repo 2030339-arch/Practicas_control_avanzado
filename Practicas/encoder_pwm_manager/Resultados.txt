@@ -1,0 +1,25 @@
+=== Estimated discrete parameters ===
+alpha_hat = 0.97528941
+beta_hat  = -0.13598710
+gamma_hat = 0.01607213
+
+=== Fit quality ===
+Samples   = 1037
+RMSE      = 0.35648036
+R^2       = 0.98243340
+
+=== Estimated continuous parameters ===
+Ts       = 0.050000 s
+a_hat    = 0.50042040 1/s
+b_hat    = -2.75390918
+c_hat    = 0.32548076
+tau_hat  = 1.99831983 s
+K_hat    = -5.50319132 rad/s/u
+d_hat    = 0.65041465 rad/s
+
+=== Model summary ===
+Discrete:
+  omega[k+1] = 0.97528941 * omega[k] + -0.13598710 * u[k] + 0.01607213
+
+Continuous:
+  dot(omega) + 0.50042040 * omega = -2.75390918 * u + 0.32548076
